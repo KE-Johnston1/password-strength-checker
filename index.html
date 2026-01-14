@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Password Strength Tester</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <main class="app">
@@ -12,12 +12,18 @@
 
     <section class="tester">
       <label for="password-input">Try a sample password:</label>
-      <input
-        id="password-input"
-        type="password"
-        placeholder="Type an example password here"
-        autocomplete="off"
-      />
+
+      <div class="password-input-row">
+        <input
+          id="password-input"
+          type="password"
+          placeholder="Type an example password here"
+          autocomplete="off"
+        />
+        <button type="button" id="toggle-visibility" class="toggle-visibility">
+          Show
+        </button>
+      </div>
 
       <div class="strength-meter">
         <div class="strength-bar"></div>
@@ -27,7 +33,6 @@
         Strength: <span id="strength-text">Waiting for input...</span>
       </p>
 
-      <!-- ENTROPY + CRACK TIME -->
       <p class="entropy-label">
         Entropy: <span id="entropy-value">0 bits</span>
       </p>
