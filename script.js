@@ -2,6 +2,8 @@ const passwordInput = document.getElementById("password-input");
 const strengthText = document.getElementById("strength-text");
 const strengthBar = document.querySelector(".strength-bar");
 const feedbackList = document.getElementById("feedback-list");
+const entropyValue = document.getElementById("entropy-value");
+const crackTimeValue = document.getElementById("crack-time");
 
 const StrengthLevel = {
   VERY_WEAK: "Very weak",
@@ -11,6 +13,9 @@ const StrengthLevel = {
   VERY_STRONG: "Very strong",
 };
 
+// -------------------------------
+// PASSWORD STRENGTH EVALUATION
+// -------------------------------
 function evaluatePassword(password) {
   if (!password) {
     return {
@@ -89,6 +94,48 @@ function evaluatePassword(password) {
   return { score, label, issues };
 }
 
+// -------------------------------
+// ENTROPY CALCULATION
+// -------------------------------
+function calculateEntropy(password) {
+  if (!password) return 0;
+
+  let charsetSize = 0;
+
+  if (/[a-z]/.test(password)) charsetSize += 26;
+  if (/[A-Z]/.test(password)) charsetSize += 26;
+  if (/\d/.test(password)) charsetSize += 10;
+  if (/[^A-Za-z0-9]/.test(password)) charsetSize += 33;
+
+  const length = password.length;
+  const entropy = length * Math.log2(charsetSize);
+
+  return Math.round(entropy);
+}
+
+// -------------------------------
+// CRACK TIME ESTIMATION
+// -------------------------------
+function estimateCrackTime(entropy) {
+  if (entropy === 0) return "N/A";
+
+  const guessesPerSecond = 1e9; // 1 billion guesses/sec
+  const totalGuesses = Math.pow(2, entropy - 1);
+  const seconds = totalGuesses / guessesPerSecond;
+
+  if (seconds < 1) return "less than 1 second";
+  if (seconds < 60) return `${Math.round(seconds)} seconds`;
+  if (seconds < 3600) return `${Math.round(seconds / 60)} minutes`;
+  if (seconds < 86400) return `${Math.round(seconds / 3600)} hours`;
+  if (seconds < 31557600) return `${Math.round(seconds / 86400)} days`;
+  if (seconds < 31557600 * 100) return `${Math.round(seconds / 31557600)} years`;
+
+  return "centuries or more";
+}
+
+// -------------------------------
+// RENDER FEEDBACK
+// -------------------------------
 function renderFeedback(issues, label) {
   feedbackList.innerHTML = "";
 
@@ -106,15 +153,32 @@ function renderFeedback(issues, label) {
   });
 }
 
+// -------------------------------
+// MAIN INPUT HANDLER
+// -------------------------------
 passwordInput.addEventListener("input", () => {
   const password = passwordInput.value;
+
   const { score, label, issues } = evaluatePassword(password);
 
+  // Update strength bar + label
   strengthBar.style.width = `${score}%`;
   strengthText.textContent = label;
+
+  // Update feedback
   renderFeedback(issues, label);
 
+  // Update entropy + crack time
+  const entropy = calculateEntropy(password);
+  const crackTime = estimateCrackTime(entropy);
+
+  entropyValue.textContent = `${entropy} bits`;
+  crackTimeValue.textContent = crackTime;
+
+  // Reset when empty
   if (!password) {
     strengthText.textContent = "Waiting for input...";
+    entropyValue.textContent = "0 bits";
+    crackTimeValue.textContent = "N/A";
   }
 });
