@@ -26,6 +26,12 @@ const StrengthLevel = {
 // -------------------------------
 function evaluatePassword(password) {
   if (!password) {
+    reqLength.classList.remove("valid");
+    reqLower.classList.remove("valid");
+    reqUpper.classList.remove("valid");
+    reqNumber.classList.remove("valid");
+    reqSymbol.classList.remove("valid");
+
     return {
       score: 0,
       label: "Waiting for input...",
@@ -134,7 +140,7 @@ function calculateEntropy(password) {
 function estimateCrackTime(entropy) {
   if (entropy === 0) return "N/A";
 
-  const guessesPerSecond = 1e9; // 1 billion guesses/sec
+  const guessesPerSecond = 1e9;
   const totalGuesses = Math.pow(2, entropy - 1);
   const seconds = totalGuesses / guessesPerSecond;
 
@@ -176,21 +182,17 @@ passwordInput.addEventListener("input", () => {
 
   const { score, label, issues } = evaluatePassword(password);
 
-  // Update strength bar + label
   strengthBar.style.width = `${score}%`;
   strengthText.textContent = label;
 
-  // Update feedback
   renderFeedback(issues, label);
 
-  // Update entropy + crack time
   const entropy = calculateEntropy(password);
   const crackTime = estimateCrackTime(entropy);
 
   entropyValue.textContent = `${entropy} bits`;
   crackTimeValue.textContent = crackTime;
 
-  // Reset when empty
   if (!password) {
     strengthText.textContent = "Waiting for input...";
     entropyValue.textContent = "0 bits";
