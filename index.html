@@ -23,14 +23,29 @@
         <div class="strength-bar"></div>
       </div>
 
-      <p class="strength-label">Strength: <span id="strength-text">Waiting for input...</span></p>
+      <p class="strength-label">
+        Strength: <span id="strength-text">Waiting for input...</span>
+      </p>
 
-      <ul class="feedback-list" id="feedback-list"></ul>
+      <!-- New: entropy + crack time display -->
+      <p class="entropy-label">
+        Entropy: <span id="entropy-value">0 bits</span>
+      </p>
+      <p class="crack-time-label">
+        Estimated crack time: <span id="crack-time">N/A</span>
+      </p>
+
+      <ul class="feedback-list" id="feedback-list">
+        <!-- Feedback items will be injected here -->
+      </ul>
     </section>
 
     <section class="disclaimer">
       <h2>Security note</h2>
-      <p>This tool runs entirely in your browser. Passwords are not sent anywhere.</p>
+      <p>
+        This tool runs entirely in your browser. Passwords are not sent to any server.
+        Use example passwords, not real ones.
+      </p>
     </section>
   </main>
 
