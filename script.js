@@ -11,10 +11,6 @@ const StrengthLevel = {
   VERY_STRONG: "Very strong",
 };
 
-/**
- * Analyze a password and return score + label + basic reasons.
- * Score is 0–100.
- */
 function evaluatePassword(password) {
   if (!password) {
     return {
@@ -64,13 +60,13 @@ function evaluatePassword(password) {
   }
 
   // 3. Repetition penalty
-  const repeatedCharMatch = /(.)\1{2,}/; // any character repeated 3+ times
+  const repeatedCharMatch = /(.)\1{2,}/;
   if (repeatedCharMatch.test(password)) {
     score -= 10;
     issues.push("Avoid repeating the same character several times in a row.");
   }
 
-  // 4. Simple sequence penalty (e.g., 1234, abcd)
+  // 4. Simple sequence penalty
   const lowerPassword = password.toLowerCase();
   const commonSequences = ["1234", "abcd", "qwerty", "password"];
   if (commonSequences.some((seq) => lowerPassword.includes(seq))) {
@@ -78,25 +74,17 @@ function evaluatePassword(password) {
     issues.push("Avoid common patterns like '1234', 'abcd', 'password', or 'qwerty'.");
   }
 
-  // Clamp score between 0 and 100
+  // Clamp score
   if (score < 0) score = 0;
   if (score > 100) score = 100;
 
   // Map score to label
   let label;
-  if (score === 0) {
-    label = StrengthLevel.VERY_WEAK;
-  } else if (score <= 25) {
-    label = StrengthLevel.VERY_WEAK;
-  } else if (score <= 45) {
-    label = StrengthLevel.WEAK;
-  } else if (score <= 65) {
-    label = StrengthLevel.FAIR;
-  } else if (score <= 85) {
-    label = StrengthLevel.STRONG;
-  } else {
-    label = StrengthLevel.VERY_STRONG;
-  }
+  if (score <= 25) label = StrengthLevel.VERY_WEAK;
+  else if (score <= 45) label = StrengthLevel.WEAK;
+  else if (score <= 65) label = StrengthLevel.FAIR;
+  else if (score <= 85) label = StrengthLevel.STRONG;
+  else label = StrengthLevel.VERY_STRONG;
 
   return { score, label, issues };
 }
@@ -122,18 +110,11 @@ passwordInput.addEventListener("input", () => {
   const password = passwordInput.value;
   const { score, label, issues } = evaluatePassword(password);
 
-  // Update strength bar
   strengthBar.style.width = `${score}%`;
-
-  // Update label
   strengthText.textContent = label;
-
-  // Update feedback list
   renderFeedback(issues, label);
 
-  // If empty, reset label text for clarity
   if (!password) {
     strengthText.textContent = "Waiting for input...";
   }
 });
-
