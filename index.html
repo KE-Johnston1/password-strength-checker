@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Password Strength Tester</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <h1>Password Strength Tester</h1>
+
+    <section class="tester">
+      <label for="password-input">Try a sample password:</label>
+      <input
+        id="password-input"
+        type="password"
+        placeholder="Type an example password here"
+        autocomplete="off"
+      />
+
+      <div class="strength-meter">
+        <div class="strength-bar"></div>
+      </div>
+
+      <p class="strength-label">Strength: <span id="strength-text">Waiting for input...</span></p>
+
+      <ul class="feedback-list" id="feedback-list"></ul>
+    </section>
+
+    <section class="disclaimer">
+      <h2>Security note</h2>
+      <p>This tool runs entirely in your browser. Passwords are not sent anywhere.</p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
