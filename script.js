@@ -4,6 +4,7 @@ const strengthBar = document.querySelector(".strength-bar");
 const feedbackList = document.getElementById("feedback-list");
 const entropyValue = document.getElementById("entropy-value");
 const crackTimeValue = document.getElementById("crack-time");
+const toggleVisibilityButton = document.getElementById("toggle-visibility");
 
 const StrengthLevel = {
   VERY_WEAK: "Very weak",
@@ -181,4 +182,13 @@ passwordInput.addEventListener("input", () => {
     entropyValue.textContent = "0 bits";
     crackTimeValue.textContent = "N/A";
   }
+});
+
+// -------------------------------
+// TOGGLE PASSWORD VISIBILITY
+// -------------------------------
+toggleVisibilityButton.addEventListener("click", () => {
+  const isPassword = passwordInput.type === "password";
+  passwordInput.type = isPassword ? "text" : "password";
+  toggleVisibilityButton.textContent = isPassword ? "Hide" : "Show";
 });
