@@ -8,11 +8,28 @@ Live Demo
 🔗 https://ke-johnston1.github.io/password-strength-checker
 
 Screenshot
+markdown
 ![Screenshot of the Password Strength Tester](./screenshot.jpg)
-
 Why I Built This
 I created this project to demonstrate practical cybersecurity thinking and to show how password strength can be explained clearly without overwhelming users.
-It’s intentionally simple, lightweight, and focused on usability the sort of tool that helps people understand why strong passwords matter, not just whether theirs is “good enough”.
+It’s intentionally simple, lightweight, and focused on usability — the sort of tool that helps people understand why strong passwords matter, not just whether theirs is “good enough”.
+
+Key Features at a Glance
+Real‑time strength analysis
+
+Entropy calculation (bits)
+
+Crack‑time estimation
+
+Requirement checklist
+
+Pattern detection
+
+Show/Hide password toggle
+
+Modern, responsive interface
+
+No libraries, no backend, no tracking
 
 Features
 Real‑time strength analysis
@@ -92,6 +109,28 @@ Code
 entropy = length × log2(character_set_size)
 Crack‑time estimation
 A conservative model assuming one billion guesses per second.
+
+What I Learned
+How to design a user‑centred interface for a security‑focused tool
+
+How to calculate entropy and explain it in a way non‑technical users can understand
+
+How to detect common password weaknesses without relying on external libraries
+
+How to structure a small project cleanly and make it easy to maintain
+
+How to present technical work clearly for recruiters and hiring managers
+
+Future Improvements
+Add a built‑in password generator
+
+Add keyboard‑walk detection (e.g., qwertyuiop)
+
+Add light/dark mode toggle
+
+Add accessibility improvements (ARIA labels, high‑contrast mode)
+
+Add optional “export report” feature
 
 Running Locally
 Clone the repository:
