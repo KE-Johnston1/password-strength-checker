@@ -6,6 +6,13 @@ const entropyValue = document.getElementById("entropy-value");
 const crackTimeValue = document.getElementById("crack-time");
 const toggleVisibilityButton = document.getElementById("toggle-visibility");
 
+// Requirement elements
+const reqLength = document.getElementById("req-length");
+const reqLower = document.getElementById("req-lower");
+const reqUpper = document.getElementById("req-upper");
+const reqNumber = document.getElementById("req-number");
+const reqSymbol = document.getElementById("req-symbol");
+
 const StrengthLevel = {
   VERY_WEAK: "Very weak",
   WEAK: "Weak",
@@ -34,6 +41,13 @@ function evaluatePassword(password) {
   const hasUpper = /[A-Z]/.test(password);
   const hasDigit = /\d/.test(password);
   const hasSymbol = /[^A-Za-z0-9]/.test(password);
+
+  // Update requirement checkmarks
+  reqLength.classList.toggle("valid", length >= 12);
+  reqLower.classList.toggle("valid", hasLower);
+  reqUpper.classList.toggle("valid", hasUpper);
+  reqNumber.classList.toggle("valid", hasDigit);
+  reqSymbol.classList.toggle("valid", hasSymbol);
 
   // 1. Length scoring
   if (length < 8) {
