@@ -5,13 +5,14 @@ It provides real‑time feedback based on length, character variety, entropy, an
 Everything runs locally — nothing is stored or transmitted.
 
 Live Demo
-🔗 https://ke-johnston1.github.io/password-strength-checker (ke-johnston1.github.io in Bing)
+🔗 https://ke-johnston1.github.io/password-strength-checker
 
-Overview
-This project was built to demonstrate practical cybersecurity thinking, clean front‑end development, and user‑centred design.
-The aim is simple: help users understand what makes a password strong, without overwhelming them with jargon.
+Screenshot
+![Screenshot of the Password Strength Tester](./screenshot.jpg)
 
-It’s lightweight, responsive, and works entirely offline once loaded.
+Why I Built This
+I created this project to demonstrate practical cybersecurity thinking and to show how password strength can be explained clearly without overwhelming users.
+It’s intentionally simple, lightweight, and focused on usability the sort of tool that helps people understand why strong passwords matter, not just whether theirs is “good enough”.
 
 Features
 Real‑time strength analysis
