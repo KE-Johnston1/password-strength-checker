@@ -124,6 +124,38 @@ label {
   transform: translateY(0);
 }
 
+/* Requirement checklist */
+.requirements-list {
+  list-style: none;
+  padding-left: 1rem;
+  margin: 0 0 1rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.requirements-list li {
+  margin-bottom: 0.25rem;
+  position: relative;
+  padding-left: 1rem;
+}
+
+.requirements-list li::before {
+  content: "✗";
+  position: absolute;
+  left: 0;
+  color: var(--danger);
+  font-weight: bold;
+}
+
+.requirements-list li.valid {
+  color: var(--success);
+}
+
+.requirements-list li.valid::before {
+  content: "✓";
+  color: var(--success);
+}
+
 .strength-meter {
   width: 100%;
   height: 10px;
@@ -184,18 +216,4 @@ label {
   border-radius: var(--radius);
   padding: 1rem 1.1rem;
   border: 1px dashed rgba(148, 163, 184, 0.5);
-}
-
-@media (max-width: 600px) {
-  .app {
-    padding: 1.5rem 1.3rem 1.6rem;
-  }
-
-  .password-input-row {
-    flex-direction: row;
-  }
-
-  h1 {
-    font-size: 1.5rem;
-  }
 }
